@@ -1,0 +1,13 @@
+repos:
+-   repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.6.4
+    hooks:
+    - id: isort
+-   repo: https://github.com/ambv/black
+    rev: stable
+    hooks:
+    - id: black
+-   repo: https://github.com/pre-commit/mirrors-pylint
+    rev: v2.6.0
+    hooks:
+    -   id: pylint

@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "pyteacher"
+version = "0.0.1"
+description = ""
+authors = ["wol4aravio <panovskiy.v@yandex.ru>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+pre-commit = "^2.11.1"
+black = "^20.8b1"
+rope = "^0.18.0"
+pytest = "^6.2.2"
+pytest-cov = "^2.11.1"
+pytest-xdist = "^2.2.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
