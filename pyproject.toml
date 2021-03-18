@@ -1,12 +1,13 @@
 [tool.poetry]
 name = "pyteacher"
-version = "0.0.1"
+version = "0.0.2"
 description = ""
 authors = ["wol4aravio <panovskiy.v@yandex.ru>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8"
+pyTelegramBotAPI = "^3.7.6"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^2.11.1"
