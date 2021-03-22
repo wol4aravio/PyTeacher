@@ -1,5 +1,6 @@
 [run]
 omit =
     pyteacher/bot.py
+    pyteacher/api.py
     *__init__.py
     tests/*
