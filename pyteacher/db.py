@@ -1,10 +1,11 @@
 import os
+from uuid import uuid4
 
 from pymongo import MongoClient
 
 
 class PyTeacherDB:
-    def __init__(self, db="db"):
+    def __init__(self, db="prod_db"):
         self._mongo = None
         self._db = db
 
@@ -27,10 +28,12 @@ class PyTeacherDB:
     def exists_user(self, telegram_user_id):
         return self.get_user(telegram_user_id) is not None
 
-    def add_user(self, user):
+    def add_user(self, user, generate_token=True):
         if self.exists_user(user.telegram_user_id):
             return False
         try:
+            if generate_token:
+                user.access_token = str(uuid4())
             self._db["users"].insert_one(user.dict())
             return True
         except Exception:

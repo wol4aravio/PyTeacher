@@ -11,6 +11,7 @@ pyTelegramBotAPI = "^3.7.6"
 pandas = "^1.2.3"
 pydantic = "^1.8.1"
 pymongo = "^3.11.3"
+fastapi = "^0.63.0"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^2.11.1"
