@@ -1,43 +1,46 @@
 import os
 
-import pandas as pd
-
-from pyteacher.models import User
+from pymongo import MongoClient
 
 
 class PyTeacherDB:
-    def __init__(self, files_dir=".files"):
-        path_users = files_dir + "/users.csv"
-        if os.path.exists(path_users):
-            self.users = pd.read_csv(path_users)
-        else:
-            self.users = pd.DataFrame(
-                list(),
-                columns=User.schema()["properties"].keys(),
+    def __init__(self, db="db"):
+        self._mongo = None
+        self._db = db
+
+    def __enter__(self):
+        self._mongo = MongoClient(
+            "mongodb://{user}:{pwd}@pyteacher_mongo:27017/".format(
+                user=os.getenv("MONGO_USER"),
+                pwd=os.getenv("MONGO_PASS"),
             )
+        )
+        self._db = self._mongo[self._db]
+        return self
+
+    def __exit__(self, _, __, ___):
+        self._mongo.close()
 
     def get_user(self, telegram_user_id):
-        if telegram_user_id in self.users["telegram_user_id"]:
-            users = self.users[self.users["telegram_user_id"] == telegram_user_id]
-            return users.iloc[0]
-        return None
+        return self._db["users"].find_one({"telegram_user_id": telegram_user_id})
 
     def exists_user(self, telegram_user_id):
         return self.get_user(telegram_user_id) is not None
 
     def add_user(self, user):
+        if self.exists_user(user.telegram_user_id):
+            return False
         try:
-            self.users = self.users.append(user.dict(), ignore_index=True)
+            self._db["users"].insert_one(user.dict())
             return True
         except Exception:
             return False
 
     def remove_user(self, telegram_user_id):
         try:
-            target_indices = self.users[
-                self.users["telegram_user_id"] == telegram_user_id
-            ].index
-            self.users.drop(target_indices, inplace=True)
+            self._db["users"].find_one_and_delete(
+                {"telegram_user_id": telegram_user_id}
+            )
             return True
         except Exception:
             return False
