@@ -1,11 +1,38 @@
 version: "3.9"
 
 services:
+  pyteacher_mongo:
+    image: mongo:4.4.4
+    container_name: pyteacher_mongo
+    restart: on-failure
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASS}
+    ports:
+      - 27017:27017
+    volumes:
+      - ./.pyteacher_data/pyteacher_mongo:/data/db
+  pyteacher_tests:
+    build:
+      context: .
+      target: test
+    container_name: pyteacher_tests
+    environment:
+      - MONGO_USER=${MONGO_USER}
+      - MONGO_PASS=${MONGO_PASS}
+    command: pytest --cov=pyteacher tests
+    depends_on:
+      - pyteacher_mongo
   pyteacher_bot:
     build:
       context: .
+      target: prod
     container_name: pyteacher_bot
     restart: on-failure
     environment:
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - MONGO_USER=${MONGO_USER}
+      - MONGO_PASS=${MONGO_PASS}
     command: python pyteacher/bot.py
+    depends_on:
+      - pyteacher_mongo
