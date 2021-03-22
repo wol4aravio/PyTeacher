@@ -12,6 +12,8 @@ pandas = "^1.2.3"
 pydantic = "^1.8.1"
 pymongo = "^3.11.3"
 fastapi = "^0.63.0"
+uvicorn = "^0.13.4"
+requests = "^2.25.1"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^2.11.1"
