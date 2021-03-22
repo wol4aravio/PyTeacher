@@ -1,5 +1,4 @@
 .env
-.files
 .vscode
 .coverage
 __pycache__
