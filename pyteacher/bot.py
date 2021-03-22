@@ -20,7 +20,7 @@ def handle_command_register(message):
     if repo_url is None:
         bot.send_message(message.chat.id, "No repo provided")
     user = User(telegram_user_id=message.from_user.id, repo_url=repo_url)
-    response = requests.post("http://pyteacher_api:8000/register", data=user.dict())
+    response = requests.post("http://pyteacher_api:8000/register", json=user.dict())
     if response.ok:
         bot.send_message(message.chat.id, "Successfully registered!")
     else:
