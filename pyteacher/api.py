@@ -16,4 +16,5 @@ def version():
 @app.post("/register")
 def register(user: User):
     with PyTeacherDB() as db:
-        db.add_user(user)
+        result = db.add_user(user)
+    return result

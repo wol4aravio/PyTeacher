@@ -21,7 +21,7 @@ def handle_command_register(message):
         bot.send_message(message.chat.id, "No repo provided")
     user = User(telegram_user_id=message.from_user.id, repo_url=repo_url)
     response = requests.post("http://pyteacher_api:8000/register", json=user.dict())
-    if response.ok:
+    if response.json():
         bot.send_message(message.chat.id, "Successfully registered!")
     else:
         bot.send_message(message.chat.id, "Smth went wrong. Try again later")
