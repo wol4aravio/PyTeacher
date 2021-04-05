@@ -1,11 +1,3 @@
-version: "3.9"
+# version: "3.9"
 
-services:
-  pyteacher_bot:
-    build:
-      context: .
-    container_name: pyteacher_bot
-    restart: on-failure
-    environment:
-      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
-    command: python pyteacher/bot.py
+# services:

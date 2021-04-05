@@ -7,7 +7,6 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-pyTelegramBotAPI = "^3.7.6"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^2.11.1"
