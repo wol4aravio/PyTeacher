@@ -1,0 +1,35 @@
+\documentclass[10pt]{book}
+
+\usepackage[a5paper, left=1.5cm, top=1.5cm, right=1.5cm, bottom=1.5cm]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english, russian]{babel}
+\usepackage[default]{droidserif}
+\usepackage[defaultsans]{droidsans}
+\usepackage{docmute}
+
+\usepackage{setspace}
+\usepackage{tocloft}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+\begin{spacing}{2.5}
+{\huge\bfseries Введение в Python \\ для разработки комплексов математических программ}
+{\Large\bfseries Пановский В.Н.}\\[5pt]
+\end{spacing}
+\end{center}
+\end{titlepage}
+
+\tableofcontents{}
+\input{./01_00_introduction.tex}
+\input{./02_00_working_env_setup.tex}
+\input{./03_00_main_types.tex}
+\input{./04_00_syntax.tex}
+\input{./05_00_functions.tex}
+\input{./06_00_oop.tex}
+\end{document}
